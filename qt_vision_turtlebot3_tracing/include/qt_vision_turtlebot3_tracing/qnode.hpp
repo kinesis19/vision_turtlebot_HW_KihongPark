@@ -9,6 +9,7 @@
 #include <QPixmap>
 #include <sensor_msgs/msg/image.hpp>
 #include <opencv2/opencv.hpp>
+#include <iostream>
 
 class QNode : public QThread
 {
@@ -16,6 +17,8 @@ class QNode : public QThread
 public:
   QNode();
   ~QNode();
+
+  void runAutoRace();
 
 protected:
   void run();

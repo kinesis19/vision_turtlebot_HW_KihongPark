@@ -12,7 +12,8 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::MainWi
   connect(qnode, &QNode::imageReceived, this, [this](const QPixmap& pixmap) {
       ui->labelCameraImg->setPixmap(pixmap.scaled(ui->labelCameraImg->size(), Qt::KeepAspectRatio)); 
   });
-
+  
+  connect(ui->btnModeAutoRace, &QPushButton::clicked, this, &MainWindow::onClickedBtnModeAutoRace);
 
   QObject::connect(qnode, SIGNAL(rosShutDown()), this, SLOT(close()));
 }
@@ -26,3 +27,11 @@ MainWindow::~MainWindow()
 {
   delete ui;
 }
+
+
+// onCLicked 
+void MainWindow::onClickedBtnModeAutoRace()
+{
+  qnode->runAutoRace();
+}
+      

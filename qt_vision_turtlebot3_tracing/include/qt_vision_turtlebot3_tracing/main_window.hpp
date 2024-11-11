@@ -15,6 +15,9 @@ public:
   ~MainWindow();
   QNode* qnode;
 
+private slots:
+  void onClickedBtnModeAutoRace();
+
 private:
   Ui::MainWindowDesign* ui;
   void closeEvent(QCloseEvent* event);

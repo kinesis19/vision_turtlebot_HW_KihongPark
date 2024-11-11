@@ -49,6 +49,19 @@
      <set>Qt::AlignmentFlag::AlignCenter</set>
     </property>
    </widget>
+   <widget class="QPushButton" name="btnModeAutoRace">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>600</y>
+      <width>150</width>
+      <height>50</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>[Mode] AutoRace</string>
+    </property>
+   </widget>
   </widget>
   <action name="action_Quit">
    <property name="text">

@@ -34,6 +34,7 @@ void QNode::run()
 }
 
 
+
 // Image Callback Method
 void QNode::imageCallback(const sensor_msgs::msg::Image::SharedPtr msg)
 {
@@ -45,4 +46,9 @@ void QNode::imageCallback(const sensor_msgs::msg::Image::SharedPtr msg)
   QPixmap pixmap = QPixmap::fromImage(qImage.rgbSwapped());  // Change to RGB and Setting the QPixmap
 
   emit imageReceived(pixmap);  // Send the Original Image
+}
+
+void QNode::runAutoRace()
+{
+  
 }
