@@ -1,28 +1,15 @@
-/**
- * @file /include/qt_vision_turtlebot3_tracing/qnode.hpp
- *
- * @brief Communications central!
- *
- * @date February 2011
- **/
-/*****************************************************************************
-** Ifdefs
-*****************************************************************************/
-
 #ifndef qt_vision_turtlebot3_tracing_QNODE_HPP_
 #define qt_vision_turtlebot3_tracing_QNODE_HPP_
 
-/*****************************************************************************
-** Includes
-*****************************************************************************/
 #ifndef Q_MOC_RUN
 #include <rclcpp/rclcpp.hpp>
 #endif
 #include <QThread>
+#include <QImage>
+#include <QPixmap>
+#include <sensor_msgs/msg/image.hpp>
+#include <opencv2/opencv.hpp>
 
-/*****************************************************************************
-** Class
-*****************************************************************************/
 class QNode : public QThread
 {
   Q_OBJECT
@@ -35,8 +22,12 @@ protected:
 
 private:
   std::shared_ptr<rclcpp::Node> node;
+  rclcpp::Subscription<sensor_msgs::msg::Image>::SharedPtr subscription_image_;
+
+  void imageCallback(const sensor_msgs::msg::Image::SharedPtr msg);
 
 Q_SIGNALS:
+  void imageReceived(const QPixmap& pixmap);
   void rosShutDown();
 };
 

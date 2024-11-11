@@ -1,14 +1,3 @@
-/**
- * @file /src/main_window.cpp
- *
- * @brief Implementation for the qt gui.
- *
- * @date August 2024
- **/
-/*****************************************************************************
-** Includes
-*****************************************************************************/
-
 #include "../include/qt_vision_turtlebot3_tracing/main_window.hpp"
 
 MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::MainWindowDesign)
@@ -19,6 +8,11 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::MainWi
   this->setWindowIcon(icon);
 
   qnode = new QNode();
+
+  connect(qnode, &QNode::imageReceived, this, [this](const QPixmap& pixmap) {
+      ui->labelCameraImg->setPixmap(pixmap.scaled(ui->labelCameraImg->size(), Qt::KeepAspectRatio)); 
+  });
+
 
   QObject::connect(qnode, SIGNAL(rosShutDown()), this, SLOT(close()));
 }
