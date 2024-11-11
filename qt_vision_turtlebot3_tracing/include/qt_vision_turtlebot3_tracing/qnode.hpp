@@ -9,6 +9,7 @@
 #include <QPixmap>
 #include <sensor_msgs/msg/image.hpp>
 #include <opencv2/opencv.hpp>
+#include <cv_bridge/cv_bridge.h>
 #include <iostream>
 
 class QNode : public QThread
@@ -18,6 +19,9 @@ public:
   QNode();
   ~QNode();
 
+  void processGaussian();
+  void procesHsv();
+  void processMask();
   void runAutoRace();
 
 protected:
@@ -27,10 +31,13 @@ private:
   std::shared_ptr<rclcpp::Node> node;
   rclcpp::Subscription<sensor_msgs::msg::Image>::SharedPtr subscription_image_;
 
+  cv::Mat image_original;
+  cv::Mat image_processed;
+
   void imageCallback(const sensor_msgs::msg::Image::SharedPtr msg);
 
 Q_SIGNALS:
-  void imageReceived(const QPixmap& pixmap);
+  void imageReceived(const QPixmap &pixmap_original, const QPixmap &pixmap_processed);
   void rosShutDown();
 };
 

@@ -1,10 +1,15 @@
 #ifndef qt_vision_turtlebot3_tracing_MAIN_WINDOW_H
 #define qt_vision_turtlebot3_tracing_MAIN_WINDOW_H
 
-#include <QMainWindow>
 #include "QIcon"
 #include "qnode.hpp"
 #include "ui_mainwindow.h"
+#include <QMainWindow>
+#include <QImage>
+#include <QPixmap>
+#include <sensor_msgs/msg/image.hpp>
+#include <opencv2/opencv.hpp>
+#include <cv_bridge/cv_bridge.h>
 
 class MainWindow : public QMainWindow
 {
@@ -20,6 +25,9 @@ private slots:
 
 private:
   Ui::MainWindowDesign* ui;
+  cv::Mat image_original;
+  cv::Mat mask_yellow;
+
   void closeEvent(QCloseEvent* event);
 };
 

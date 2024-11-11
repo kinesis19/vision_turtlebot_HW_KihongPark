@@ -8,11 +8,14 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::MainWi
   this->setWindowIcon(icon);
 
   qnode = new QNode();
-
-  connect(qnode, &QNode::imageReceived, this, [this](const QPixmap& pixmap) {
-      ui->labelCameraImg->setPixmap(pixmap.scaled(ui->labelCameraImg->size(), Qt::KeepAspectRatio)); 
+  
+  connect(qnode, &QNode::imageReceived, this, [this](const QPixmap &pixmap_original, const QPixmap& pixmap_processed) {
+    ui->labelCameraImg_1->setPixmap(pixmap_original.scaled(ui->labelCameraImg_1->size(), Qt::KeepAspectRatio));
+    ui->labelCameraImg_2->setPixmap(pixmap_processed.scaled(ui->labelCameraImg_2->size(), Qt::KeepAspectRatio));
   });
   
+
+
   connect(ui->btnModeAutoRace, &QPushButton::clicked, this, &MainWindow::onClickedBtnModeAutoRace);
 
   QObject::connect(qnode, SIGNAL(rosShutDown()), this, SLOT(close()));
@@ -34,4 +37,3 @@ void MainWindow::onClickedBtnModeAutoRace()
 {
   qnode->runAutoRace();
 }
-      
