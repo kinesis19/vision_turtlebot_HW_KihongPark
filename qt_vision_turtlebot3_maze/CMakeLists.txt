@@ -12,6 +12,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # find dependencies
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
+find_package(std_msgs REQUIRED)
 find_package(sensor_msgs REQUIRED)
 find_package(geometry_msgs REQUIRED)
 find_package(tf2_ros REQUIRED)
@@ -39,7 +40,7 @@ add_executable(${PROJECT_NAME}
     ${QT_RESOUCE_HPP}
     ${QT_UI_HPP} 
   )
-ament_target_dependencies(${PROJECT_NAME} rclcpp sensor_msgs geometry_msgs tf2_ros turtlebot3_msgs Boost )
+ament_target_dependencies(${PROJECT_NAME} rclcpp std_msgs sensor_msgs geometry_msgs tf2_ros turtlebot3_msgs Boost )
 target_link_libraries(${PROJECT_NAME} Qt5::Widgets Qt5::Core Qt5::Gui Qt5::Network ${OpenCV_LIBRARIES})
 install(TARGETS ${PROJECT_NAME} DESTINATION lib/${PROJECT_NAME})
 if(BUILD_TESTING)
