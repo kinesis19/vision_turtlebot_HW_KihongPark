@@ -22,6 +22,7 @@ private:
   Ui::MainWindowDesign* ui;
   void closeEvent(QCloseEvent* event);
   void setLidarSensorDistancetoLabel(float distFront, float distBack, float distLeft, float distRight);
+  void setExitNumbertoLabel(int num);
 };
 
 #endif  // qt_vision_turtlebot3_maze_MAIN_WINDOW_H

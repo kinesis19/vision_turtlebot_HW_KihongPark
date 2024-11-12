@@ -1,6 +1,6 @@
 #include "../include/qt_vision_turtlebot3_maze/qnode.hpp"
 
-QNode::QNode() : distance_front_current_(0.0), distance_back_current_(0.0), distance_left_current_(0.0), distance_right_current_(0.0), velocity_linear_(0.0), velocity_angular_(0.0), isStart(false)
+QNode::QNode() : distance_front_current_(0.0), distance_back_current_(0.0), distance_left_current_(0.0), distance_right_current_(0.0), velocity_linear_(0.0), velocity_angular_(0.0), isStart(false), exitNum(0)
 {
   int argc = 0;
   char** argv = NULL;
@@ -9,6 +9,9 @@ QNode::QNode() : distance_front_current_(0.0), distance_back_current_(0.0), dist
 
   // 서브스크라이버 초기화: /scan 토픽 
   subscriber_scan_ = node->create_subscription<sensor_msgs::msg::LaserScan>("/scan", 10, std::bind(&QNode::scanCallback, this, std::placeholders::_1));
+  // /turtlebot3_status_manager/number 토픽
+  subscriber_exit_num_ = node->create_subscription<std_msgs::msg::Int32>("/turtlebot3_status_manager/number", 10, std::bind(&QNode::exitNumCallback, this, std::placeholders::_1));
+
   // 퍼블리셔 초기화: /cmd_vel 토픽
   publisher_cmd_vel_ = node->create_publisher<geometry_msgs::msg::Twist>("/cmd_vel", 10);
 
@@ -49,6 +52,14 @@ void QNode::scanCallback(const sensor_msgs::msg::LaserScan::SharedPtr msg)
 
   emit updateDistanceLabel(distance_front_current_, distance_back_current_, distance_left_current_, distance_right_current_);
 }
+
+void QNode::exitNumCallback(const std_msgs::msg::Int32::SharedPtr num)
+{
+  exitNum = num->data;
+
+  emit updateExitNumLabel(exitNum);
+}
+
 
 // Turtlebot3 정지 메서드
 void QNode::stopRobot()
