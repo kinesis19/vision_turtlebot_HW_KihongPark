@@ -9,11 +9,13 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::MainWi
 
   qnode = new QNode();
   
-  connect(qnode, &QNode::imageReceived, this, [this](const QPixmap &pixmap_original, const QPixmap& pixmap_processed) {
+  connect(qnode, &QNode::imageReceivedOriginal, this, [this](const QPixmap &pixmap_original) {
     ui->labelCameraImg_1->setPixmap(pixmap_original.scaled(ui->labelCameraImg_1->size(), Qt::KeepAspectRatio));
-    ui->labelCameraImg_2->setPixmap(pixmap_processed.scaled(ui->labelCameraImg_2->size(), Qt::KeepAspectRatio));
   });
   
+  connect(qnode, &QNode::imageReceivedProcessed, this, [this](const QPixmap& pixmap_processed) {
+    ui->labelCameraImg_2->setPixmap(pixmap_processed.scaled(ui->labelCameraImg_2->size(), Qt::KeepAspectRatio));
+  });
 
 
   connect(ui->btnModeAutoRace, &QPushButton::clicked, this, &MainWindow::onClickedBtnModeAutoRace);
@@ -35,5 +37,10 @@ MainWindow::~MainWindow()
 // onCLicked 
 void MainWindow::onClickedBtnModeAutoRace()
 {
-  qnode->runAutoRace();
+  qnode->toggleAutoRace();
+    if (qnode->is_auto_race_active) {
+        ui->btnModeAutoRace->setText("Stop Auto Race");
+    } else {
+        ui->btnModeAutoRace->setText("Start Auto Race");
+    }
 }
