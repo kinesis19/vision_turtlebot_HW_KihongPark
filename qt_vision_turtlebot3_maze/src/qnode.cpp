@@ -1,15 +1,3 @@
-/**
- * @file /src/qnode.cpp
- *
- * @brief Ros communication central!
- *
- * @date August 2024
- **/
-
-/*****************************************************************************
-** Includes
-*****************************************************************************/
-
 #include "../include/qt_vision_turtlebot3_maze/qnode.hpp"
 
 QNode::QNode()

@@ -1,14 +1,3 @@
-/**
- * @file /src/main_window.cpp
- *
- * @brief Implementation for the qt gui.
- *
- * @date August 2024
- **/
-/*****************************************************************************
-** Includes
-*****************************************************************************/
-
 #include "../include/qt_vision_turtlebot3_maze/main_window.hpp"
 
 MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::MainWindowDesign)

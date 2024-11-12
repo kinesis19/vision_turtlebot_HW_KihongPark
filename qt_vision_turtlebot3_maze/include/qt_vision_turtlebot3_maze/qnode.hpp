@@ -1,28 +1,11 @@
-/**
- * @file /include/qt_vision_turtlebot3_maze/qnode.hpp
- *
- * @brief Communications central!
- *
- * @date February 2011
- **/
-/*****************************************************************************
-** Ifdefs
-*****************************************************************************/
-
 #ifndef qt_vision_turtlebot3_maze_QNODE_HPP_
 #define qt_vision_turtlebot3_maze_QNODE_HPP_
 
-/*****************************************************************************
-** Includes
-*****************************************************************************/
 #ifndef Q_MOC_RUN
 #include <rclcpp/rclcpp.hpp>
 #endif
 #include <QThread>
 
-/*****************************************************************************
-** Class
-*****************************************************************************/
 class QNode : public QThread
 {
   Q_OBJECT
