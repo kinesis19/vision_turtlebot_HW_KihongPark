@@ -9,7 +9,9 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::MainWi
 
   qnode = new QNode();
 
-  QObject::connect(qnode, SIGNAL(rosShutDown()), this, SLOT(close()));
+  connect(ui->btnStart, &QPushButton::clicked, this, &MainWindow::onClickedBtnStart);
+
+  connect(qnode, SIGNAL(rosShutDown()), this, SLOT(close()));
 }
 
 void MainWindow::closeEvent(QCloseEvent* event)
@@ -20,4 +22,10 @@ void MainWindow::closeEvent(QCloseEvent* event)
 MainWindow::~MainWindow()
 {
   delete ui;
+}
+
+
+void MainWindow::onClickedBtnStart()
+{
+  RCLCPP_WARN(rclcpp::get_logger("QNode"), "버튼 클릭됨");
 }
