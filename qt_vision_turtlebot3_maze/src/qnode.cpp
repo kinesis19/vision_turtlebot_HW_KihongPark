@@ -29,6 +29,10 @@ void QNode::run()
   while (rclcpp::ok())
   {
     rclcpp::spin_some(node);
+    if (isStart)
+    {
+      runEscape();
+    }
     loop_rate.sleep();
   }
   rclcpp::shutdown();
@@ -44,4 +48,31 @@ void QNode::scanCallback(const sensor_msgs::msg::LaserScan::SharedPtr msg)
   distance_right_current_ = msg->ranges[msg->ranges.size() * 3 / 4];
 
   emit updateDistanceLabel(distance_front_current_, distance_back_current_, distance_left_current_, distance_right_current_);
+}
+
+// Turtlebot3 정지 메서드
+void QNode::stopRobot()
+{
+  geometry_msgs::msg::Twist cmd_msg;
+  cmd_msg.linear.x = 0.0;
+  cmd_msg.angular.z = 0.0;
+  publisher_cmd_vel_->publish(cmd_msg);
+
+  RCLCPP_WARN(rclcpp::get_logger("QNode"), "Turtlebot3 작동 정지");
+}
+
+// Turtlebot3 미로 찾기 플래그 설정을 위한 토글 메서드
+void QNode::toggleStart()
+{
+  isStart = !isStart;
+  if (!isStart) {
+    stopRobot();
+  } else {
+    RCLCPP_WARN(rclcpp::get_logger("QNode"), "Turtlebot3 작동 시작");
+  }
+}
+
+void QNode::runEscape()
+{
+  RCLCPP_WARN(rclcpp::get_logger("QNode"), "미로 탈출 로직 실행 중..");
 }

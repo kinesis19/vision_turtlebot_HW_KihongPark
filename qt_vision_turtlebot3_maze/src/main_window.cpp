@@ -30,7 +30,12 @@ MainWindow::~MainWindow()
 
 void MainWindow::onClickedBtnStart()
 {
-  RCLCPP_WARN(rclcpp::get_logger("QNode"), "버튼 클릭됨");
+  qnode->toggleStart();
+  if (qnode->isStart) {
+    ui->btnStart->setText("Stop");
+  } else {
+    ui->btnStart->setText("Start");
+  }
 }
 
 void MainWindow::setLidarSensorDistancetoLabel(float distFront, float distBack, float distLeft, float distRight)

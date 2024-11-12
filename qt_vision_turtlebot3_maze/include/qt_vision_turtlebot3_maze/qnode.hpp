@@ -15,6 +15,10 @@ public:
   QNode();
   ~QNode();
 
+  bool isStart;
+
+  void toggleStart();
+
 protected:
   void run();
 
@@ -30,9 +34,9 @@ private:
   float velocity_linear_;
   float velocity_angular_;
 
-  bool isStart;
-
   void scanCallback(const sensor_msgs::msg::LaserScan::SharedPtr msg);  // 라이다 센서 콜백 메서드
+  void stopRobot();
+  void runEscape();
 
 Q_SIGNALS:
   void rosShutDown();
