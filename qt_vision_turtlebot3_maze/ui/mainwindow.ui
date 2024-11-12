@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>QRosApp</string>
+   <string>qt_vision_turtlebot3_maze</string>
   </property>
   <property name="windowIcon">
    <iconset resource="../resources/images.qrc">
@@ -20,7 +20,21 @@
   <property name="locale">
    <locale language="English" country="Australia"/>
   </property>
-  <widget class="QWidget" name="centralwidget"/>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QPushButton" name="btnStart">
+    <property name="geometry">
+     <rect>
+      <x>400</x>
+      <y>600</y>
+      <width>89</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Start</string>
+    </property>
+   </widget>
+  </widget>
   <action name="action_Quit">
    <property name="text">
     <string>&amp;Quit</string>
@@ -29,7 +43,7 @@
     <string>Ctrl+Q</string>
    </property>
    <property name="shortcutContext">
-    <enum>Qt::ApplicationShortcut</enum>
+    <enum>Qt::ShortcutContext::ApplicationShortcut</enum>
    </property>
   </action>
   <action name="action_Preferences">
