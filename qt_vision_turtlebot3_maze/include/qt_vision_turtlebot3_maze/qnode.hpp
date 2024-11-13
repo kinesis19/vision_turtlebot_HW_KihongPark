@@ -6,6 +6,7 @@
 #include <rclcpp/rclcpp.hpp>
 #endif
 #include <QThread>
+#include <cmath>
 #include <sensor_msgs/msg/laser_scan.hpp>
 #include <geometry_msgs/msg/twist.hpp>
 #include "std_msgs/msg/int32.hpp"
@@ -37,12 +38,20 @@ private:
   float velocity_linear_;
   float velocity_angular_;
 
+  bool isNeartoWall;
+
   int32_t exitNum;
+  float aryLidarSensorValue[4];
 
   void scanCallback(const sensor_msgs::msg::LaserScan::SharedPtr msg);  // 라이다 센서 콜백 메서드
   void exitNumCallback(const std_msgs::msg::Int32::SharedPtr num);
   void stopRobot();
   void runEscape();
+
+  void checkWallNear(); // 충돌 방지 메서드
+
+  int getHighValuefromLiDARSensor();
+  double getCurrentAngle();
 
 Q_SIGNALS:
   void rosShutDown();
