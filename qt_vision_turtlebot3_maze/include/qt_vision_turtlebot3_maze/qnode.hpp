@@ -38,7 +38,13 @@ private:
   float velocity_linear_;
   float velocity_angular_;
 
+  float distance_front_avg_;
+  float distance_back_avg_;
+  float distance_left_avg_;
+  float distance_right_avg_;
+
   bool isNeartoWall;
+  bool isFollowLeftWall;
 
   int32_t exitNum;
   float aryLidarSensorValue[4];
