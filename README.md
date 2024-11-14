@@ -17,9 +17,14 @@ source ~/{Your WorkSpace}/install.setup
 ```
 
 ## Run
-### Run Package
+### Run Package (Tracing)
 ```bash
 ros2 run ros2 run qt_vision_turtlebot3_tracing qt_vision_turtlebot3_tracing
+```
+
+### Run Package (Maze)
+```bash
+ros2 run ros2 run qt_vision_turtlebot3_maze qt_vision_turtlebot3_maze
 ```
 
 ### Run Gazebo
